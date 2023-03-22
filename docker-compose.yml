@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  # Development container. 
+  # Runs in debug mode and live-reloading on every source file update.
+  checker-dev:
+    hostname: checker-dev
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    environment:
+      DEBUG: "true"
+      APP_PORT: "8888"
+    volumes:
+      - .:/app
+    ports:
+      - "8888:8888"
