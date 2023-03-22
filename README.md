@@ -1,2 +1,15 @@
-# checker
-Go sample project
+# Go-Sample-Project
+
+Try Go with Fiber and Wire DI.
+
+## Usage
+
+```bash
+   docker-compose up --build checker-dev
+```
+
+## Docs:
+
+- [Fiber](https://gofiber.io/)
+- [Wire](https://github.com/google/wire)
+- [Testify](https://github.com/stretchr/testify)
