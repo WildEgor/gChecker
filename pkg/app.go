@@ -20,10 +20,10 @@ func NewApp(status *handlers.HealthCheckHandler) *fiber.App {
 
 	v1 := app.Group("/api/v1")
 
-	// Server status endpoint - sanity check that the server is running
+	// Server endpoint - sanity check that the server is running
 	statusGroup := v1.Group("/health")
 	statusGroup.Get("/check", status.HealthCheckHandle)
 
-	log.Info("Application is running...")
+	log.Info("Application is running on port...")
 	return app
 }
