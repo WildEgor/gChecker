@@ -11,8 +11,8 @@ type Config struct {
 	Version string `dotenv:"VERSION"`
 }
 
-// NewConfig - creates the application config struct
-func NewConfig() *Config {
+// NewAppConfig - creates the application config struct
+func NewAppConfig() *Config {
 	var config Config
 
 	// Setting defaults

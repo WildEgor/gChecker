@@ -11,7 +11,7 @@ import (
 )
 
 func New() (*fiber.App, error) {
-	configConfig := config.NewConfig()
+	configConfig := config.NewAppConfig()
 	statusRepository := adapters.NewPingAdapter(configConfig)
 	statusHandler := handlers.NewHealthCheckHandler(statusRepository)
 	app := NewApp(statusHandler)

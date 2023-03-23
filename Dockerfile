@@ -7,8 +7,10 @@ RUN go mod download && mkdir -p dist
 
 # Development Stage
 FROM base as dev
-RUN go install -mod=mod github.com/githubnemo/CompileDaemon
-ENTRYPOINT CompileDaemon --build="go build -o dist/app cmd/main.go" --command=./dist/app
+WORKDIR /app
+RUN go install -mod=mod github.com/cosmtrek/air
+RUN cp /app/.air-unix.toml /app/.air.toml
+ENTRYPOINT ["air"]
 
 # # Test Stage
 # FROM base as test
@@ -23,8 +25,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o dist/app cmd/main
 # Production Stage
 FROM alpine:latest as production
 RUN apk --no-cache add ca-certificates
-ARG APP_PATH=/app
+ARG APP_PATH=/root/
 WORKDIR $APP_PATH
 COPY --from=builder /app/dist/app .
 EXPOSE 8888
+RUN ls  
 CMD ["./app"]
