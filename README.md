@@ -5,7 +5,9 @@ Try Go with Fiber and Wire DI.
 ## Usage
 
 ```bash
-   docker-compose up --build checker-dev
+   docker-compose up --build checker-dev // for develop
+   
+   docker-compose up --build checker // for prod
 ```
 
 ## Docs:
