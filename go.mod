@@ -6,6 +6,9 @@ require github.com/gofiber/cors v0.2.2
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/cosmtrek/air v1.42.0 // indirect
+	github.com/creack/pty v1.1.18 // indirect
+	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gofiber/fiber v1.13.3 // indirect
 	github.com/gofiber/fiber/v2 v2.42.0 // indirect
@@ -15,12 +18,14 @@ require (
 	github.com/google/wire v0.5.0 // indirect
 	github.com/gorilla/schema v1.1.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/imdario/mergo v0.3.14 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
