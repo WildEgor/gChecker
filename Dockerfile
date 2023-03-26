@@ -9,7 +9,6 @@ RUN go mod download && mkdir -p dist
 FROM base as dev
 WORKDIR /app
 RUN go install -mod=mod github.com/cosmtrek/air
-RUN cp /app/.air-unix.toml /app/.air.toml
 ENTRYPOINT ["air"]
 
 # # Test Stage

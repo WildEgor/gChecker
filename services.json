@@ -1,0 +1,11 @@
+{
+    "timeout": 5,
+    "messTimeout": 5,
+    "urls": [
+        {
+            "id": 0,
+            "url": "https://api.qabat.com/test",
+            "updated_at": null
+        }
+    ]
+}

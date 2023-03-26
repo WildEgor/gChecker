@@ -21,13 +21,13 @@ func NewPingAdapter(c *config.AppConfig) *PingAdapter {
 	}
 }
 
-func (service *PingAdapter) GetApplicationStatus() *domains.StatusDomain {
+func (pa *PingAdapter) GetApplicationStatus() *domains.StatusDomain {
 
 	// TODO: check system health here
 
 	return &domains.StatusDomain{
 		Status:      "ok",
-		Version:     service.Version,
-		Environment: service.Environment,
+		Version:     pa.Version,
+		Environment: pa.Environment,
 	}
 }

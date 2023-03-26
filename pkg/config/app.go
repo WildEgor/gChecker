@@ -1,32 +1,37 @@
 package config
 
 import (
-	"github.com/spf13/viper"
+	"github.com/caarlos0/env/v7"
+	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
 )
 
 // HINT: holds on general app settings
 type AppConfig struct {
-	Port    string `dotenv:"APP_PORT"`
-	Mode    string `dotenv:"APP_MODE"`
-	GoEnv   string `dotenv:"GO_ENV"`
-	Version string `dotenv:"VERSION"`
+	Port    string `env:"APP_PORT"`
+	Mode    string `env:"APP_MODE"`
+	GoEnv   string `env:"GO_ENV"`
+	Version string `env:"VERSION"`
 }
 
 func NewAppConfig() *AppConfig {
-	var config AppConfig
+	cfg := AppConfig{}
 
-	// Setting defaults
-	if viper.Get("GO_ENV") == nil {
-		viper.SetDefault("GO_ENV", "local")
+	if err := godotenv.Load(".env"); err == nil {
+		if err := env.Parse(&cfg); err != nil {
+			log.Printf("%+v\n", err)
+		}
+
+		if cfg.GoEnv == "" {
+			cfg.GoEnv = "local"
+		}
+
+		if cfg.Version == "" {
+			cfg.Version = "local"
+		}
 	}
 
-	if viper.Get("VERSION") == nil {
-		viper.SetDefault("VERSION", "local")
-	}
-
-	viper.Unmarshal(&config)
-
-	return &config
+	return &cfg
 }
 
 func (ac AppConfig) IsProduction() bool {
