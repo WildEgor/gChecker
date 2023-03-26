@@ -10,11 +10,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: dev
-    environment:
-      DEBUG: "true"
-      APP_PORT: "8888"
+    env_file:
+      ./.env
     volumes:
-      - .:/app
+      - ./:/app
     ports:
       - "8888:8888"
 
@@ -25,9 +24,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: production
-    environment:
-      DEBUG: "false"
-      APP_PORT: "8888"
+    env_file:
+      ./.env
     volumes:
       - .:/app
     ports:

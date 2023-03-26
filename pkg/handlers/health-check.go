@@ -6,19 +6,19 @@ import (
 )
 
 type HealthCheckHandler struct {
-	PingAdapter adapters.IPingAdapter
+	pa adapters.IPingAdapter
 }
 
-func NewHealthCheckHandler(pingAdapter adapters.IPingAdapter) *HealthCheckHandler {
+func NewHealthCheckHandler(pa adapters.IPingAdapter) *HealthCheckHandler {
 	return &HealthCheckHandler{
-		PingAdapter: pingAdapter,
+		pa: pa,
 	}
 }
 
 func (s *HealthCheckHandler) Handle(c *fiber.Ctx) error {
 	c.JSON(fiber.Map{
 		"isOk": true,
-		"data": s.PingAdapter.GetApplicationStatus(),
+		"data": s.pa.GetApplicationStatus(),
 	})
 	return nil
 }

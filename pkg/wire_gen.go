@@ -11,21 +11,26 @@ import (
 	"github.com/WildEgor/checker/pkg/config"
 	"github.com/WildEgor/checker/pkg/handlers"
 	"github.com/WildEgor/checker/pkg/router"
+	"github.com/WildEgor/checker/pkg/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/wire"
 )
 
 // Injectors from server.go:
 
-func New() (*fiber.App, error) {
+func NewServer() (*fiber.App, error) {
 	appConfig := config.NewAppConfig()
 	pingAdapter := adapters.NewPingAdapter(appConfig)
 	healthCheckHandler := handlers.NewHealthCheckHandler(pingAdapter)
 	routerRouter := router.NewRouter(healthCheckHandler)
-	app := NewApp(appConfig, routerRouter)
+	telegramConfig := config.NewTelegramConfig()
+	telegramAdapter := adapters.NewTelegramAdapter(telegramConfig)
+	servicesConfig := config.NewServicesConfig()
+	checkerService := services.NewCheckerService(telegramAdapter, servicesConfig)
+	app := NewApp(appConfig, routerRouter, checkerService)
 	return app, nil
 }
 
 // server.go:
 
-var Set = wire.NewSet(AppSet)
+var ServerSet = wire.NewSet(AppSet)
