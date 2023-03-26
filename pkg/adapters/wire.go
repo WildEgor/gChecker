@@ -2,8 +2,7 @@ package adapters
 
 import "github.com/google/wire"
 
-//
-var Set = wire.NewSet(
+var AdaptersSet = wire.NewSet(
 	NewPingAdapter,
 	wire.Bind(new(IPingAdapter), new(*PingAdapter)),
 )

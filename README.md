@@ -15,3 +15,6 @@ Try Go with Fiber and Wire DI.
 - [Fiber](https://gofiber.io/)
 - [Wire](https://github.com/google/wire)
 - [Testify](https://github.com/stretchr/testify)
+
+## TODO: 
+https://projectbook.code.brettchalupa.com/web-apps/uptime-checker.html

@@ -2,27 +2,29 @@ package pkg
 
 import (
 	"github.com/WildEgor/checker/pkg/config"
-	"github.com/WildEgor/checker/pkg/handlers"
-	"github.com/gofiber/cors"
-	"github.com/gofiber/fiber"
+	"github.com/WildEgor/checker/pkg/router"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/google/wire"
 	log "github.com/sirupsen/logrus"
 )
 
-var AppSet = wire.NewSet(NewApp, handlers.Set, config.Set)
+var AppSet = wire.NewSet(NewApp, config.ConfigsSet, router.RouterSet)
 
-func NewApp(status *handlers.HealthCheckHandler) *fiber.App {
+func NewApp(
+	appConfig *config.AppConfig,
+	router *router.Router,
+) *fiber.App {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
+		AllowHeaders:     "Origin, Content-Type, Accept, Content-Length, Accept-Language, Accept-Encoding, Connection, Access-Control-Allow-Origin",
+		AllowOrigins:     "*",
+		AllowCredentials: true,
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 	}))
 
-	v1 := app.Group("/api/v1")
-
-	// Server endpoint - sanity check that the server is running
-	statusGroup := v1.Group("/health")
-	statusGroup.Get("/check", status.HealthCheckHandle)
+	router.Setup(app)
 
 	log.Info("Application is running on port...")
 	return app

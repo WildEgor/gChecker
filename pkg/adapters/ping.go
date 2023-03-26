@@ -2,7 +2,7 @@ package adapters
 
 import (
 	"github.com/WildEgor/checker/pkg/config"
-	domains "github.com/WildEgor/checker/pkg/infrastructure/domain"
+	domains "github.com/WildEgor/checker/pkg/domain"
 )
 
 type PingAdapter struct {
@@ -11,18 +11,21 @@ type PingAdapter struct {
 }
 
 type IPingAdapter interface {
-	GetApplicationStatus() *domains.Status
+	GetApplicationStatus() *domains.StatusDomain
 }
 
-func NewPingAdapter(c *config.Config) *PingAdapter {
+func NewPingAdapter(c *config.AppConfig) *PingAdapter {
 	return &PingAdapter{
 		Version:     c.Version,
 		Environment: c.GoEnv,
 	}
 }
 
-func (service *PingAdapter) GetApplicationStatus() *domains.Status {
-	return &domains.Status{
+func (service *PingAdapter) GetApplicationStatus() *domains.StatusDomain {
+
+	// TODO: check system health here
+
+	return &domains.StatusDomain{
 		Status:      "ok",
 		Version:     service.Version,
 		Environment: service.Environment,
