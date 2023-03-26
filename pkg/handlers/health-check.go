@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	adapters "github.com/WildEgor/checker/pkg/infrastructure/adapters/ping"
-	"github.com/gofiber/fiber"
+	adapters "github.com/WildEgor/checker/pkg/adapters"
+	"github.com/gofiber/fiber/v2"
 )
 
 type HealthCheckHandler struct {
@@ -15,10 +15,10 @@ func NewHealthCheckHandler(pingAdapter adapters.IPingAdapter) *HealthCheckHandle
 	}
 }
 
-func (s *HealthCheckHandler) HealthCheckHandle(c *fiber.Ctx) {
+func (s *HealthCheckHandler) Handle(c *fiber.Ctx) error {
 	c.JSON(fiber.Map{
 		"isOk": true,
 		"data": s.PingAdapter.GetApplicationStatus(),
 	})
-	return
+	return nil
 }

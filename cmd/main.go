@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	server "github.com/WildEgor/checker/pkg"
@@ -32,5 +33,5 @@ func init() {
 func main() {
 	server, _ := server.New()
 	port := viper.Get("APP_PORT")
-	log.Fatal(server.Listen(port))
+	log.Fatal(server.Listen(fmt.Sprintf(":%v", port)))
 }
