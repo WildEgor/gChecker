@@ -25,10 +25,10 @@ func NewCheckerService(
 }
 
 // HINT: running in goroutine
-func (s *CheckerService) Check() error {
+func (s *CheckerService) Check() {
 	log.Info(s.servicesConfig.ServiceUrls)
 	for {
-		sleep := time.Second * time.Duration(s.servicesConfig.CheckTimeout)
+		sleep := time.Duration(s.servicesConfig.CheckTimeout)
 		for _, service := range s.servicesConfig.ServiceUrls {
 			func() {
 				log.Info("Start check...")
@@ -42,11 +42,10 @@ func (s *CheckerService) Check() error {
 				defer resp.Body.Close()
 				if resp.StatusCode != 200 {
 					s.telegramAdapter.SendAlert(service.URL, resp.Status)
-					sleep = time.Second * time.Duration(s.servicesConfig.MessTimeout)
+					sleep = time.Duration(s.servicesConfig.MessTimeout)
 				}
 			}()
 		}
-		time.Sleep(time.Second * time.Duration(sleep))
-		return nil
+		time.Sleep(time.Duration(sleep) * time.Second)
 	}
 }
