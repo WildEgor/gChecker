@@ -24,3 +24,4 @@ vendor
 build
 dist
 .env
+/tmp

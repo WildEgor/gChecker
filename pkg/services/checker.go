@@ -43,6 +43,8 @@ func (s *CheckerService) Check() {
 				if resp.StatusCode != 200 {
 					s.telegramAdapter.SendAlert(service.URL, resp.Status)
 					sleep = time.Duration(s.servicesConfig.MessTimeout)
+				} else {
+					defer resp.Body.Close()
 				}
 			}()
 		}
