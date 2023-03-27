@@ -12,7 +12,7 @@ type TelegramAdapter struct {
 }
 
 type ITelegramAdapter interface {
-	SendAlert(resource string, status string)
+	SendAlert(resource string, status string) error
 }
 
 func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
@@ -27,9 +27,10 @@ func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 	}
 }
 
-func (t *TelegramAdapter) SendAlert(r string, s string) {
+func (t *TelegramAdapter) SendAlert(r string, s string) error {
 	log.Info("Send alert!")
 	msg := tgbotapi.NewMessage(t.tc.ChatId, "Service <code>"+r+"</code> is down\n"+"Status: <b>"+s+"</b>")
 	msg.ParseMode = tgbotapi.ModeHTML
-	t.bot.Send(msg)
+	_, err := t.bot.Send(msg)
+	return err
 }
