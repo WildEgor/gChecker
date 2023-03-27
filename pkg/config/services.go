@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -39,7 +38,7 @@ func NewServicesConfig() *ServicesConfig {
 		cName = filepath.Join(ServicesConfigFileName)
 	}
 
-	bts, err := ioutil.ReadFile(cName)
+	bts, err := os.ReadFile(cName)
 	if err != nil {
 		log.Fatal("Cannot open file", err)
 	}
