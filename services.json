@@ -1,11 +1,13 @@
 {
     "timeout": 5,
-    "messTimeout": 5,
     "urls": [
         {
-            "id": 0,
-            "url": "https://api.qabat.com/test",
-            "updated_at": null
+            "id": "Google 404",
+            "url": "https://google.com/test"
+        },
+        {
+            "id": "Google OK",
+            "url": "https://google.com"
         }
     ]
 }

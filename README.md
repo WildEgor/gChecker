@@ -2,6 +2,8 @@
 
 Try Go with Fiber and Wire DI.
 
+Service check all url from service.json and expose self health-check
+
 ## Usage
 
 ```bash

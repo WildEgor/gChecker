@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/WildEgor/checker/pkg/handlers"
+	"github.com/WildEgor/gChecker/internal/handlers"
 	"github.com/google/wire"
 )
 

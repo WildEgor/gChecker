@@ -6,7 +6,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// HINT: holds on telegram settings
 type TelegramConfig struct {
 	ChatId int64  `env:"TELEGRAM_CHAT_ID"`
 	Token  string `env:"TELEGRAM_TOKEN"`
@@ -17,7 +16,7 @@ func NewTelegramConfig() *TelegramConfig {
 
 	if err := godotenv.Load(".env"); err == nil {
 		if err := env.Parse(&cfg); err != nil {
-			log.Printf("%+v\n", err)
+			log.Printf("[TelegramConfig] %+v\n", err)
 		}
 	}
 

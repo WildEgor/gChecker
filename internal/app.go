@@ -1,11 +1,14 @@
 package pkg
 
 import (
-	"github.com/WildEgor/checker/pkg/adapters"
-	"github.com/WildEgor/checker/pkg/config"
-	error_handler "github.com/WildEgor/checker/pkg/errors"
-	"github.com/WildEgor/checker/pkg/router"
-	"github.com/WildEgor/checker/pkg/services"
+	"context"
+	"os"
+
+	"github.com/WildEgor/gChecker/internal/adapters"
+	"github.com/WildEgor/gChecker/internal/config"
+	error_handler "github.com/WildEgor/gChecker/internal/errors"
+	"github.com/WildEgor/gChecker/internal/router"
+	"github.com/WildEgor/gChecker/internal/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
@@ -38,13 +41,21 @@ func NewApp(
 	}))
 	app.Use(recover.New())
 
+	// Set logging settings
+	log.SetFormatter(&log.JSONFormatter{})
+	log.SetOutput(os.Stdout)
+
 	if !appConfig.IsProduction() {
-		// TODO: add swagger here
+		// HINT: some extra setting
+		log.SetLevel(log.DebugLevel)
+	} else {
+		log.SetLevel(log.ErrorLevel)
 	}
 
 	router.Setup(app)
 
-	go services.Check()
+	// go services.Check()
+	go services.ServicesCheck(context.Background())
 
 	log.Info("Application is running on port...")
 	return app

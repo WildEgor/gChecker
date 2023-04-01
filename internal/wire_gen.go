@@ -7,11 +7,11 @@
 package pkg
 
 import (
-	"github.com/WildEgor/checker/pkg/adapters"
-	"github.com/WildEgor/checker/pkg/config"
-	"github.com/WildEgor/checker/pkg/handlers"
-	"github.com/WildEgor/checker/pkg/router"
-	"github.com/WildEgor/checker/pkg/services"
+	"github.com/WildEgor/gChecker/internal/adapters"
+	"github.com/WildEgor/gChecker/internal/config"
+	"github.com/WildEgor/gChecker/internal/handlers"
+	"github.com/WildEgor/gChecker/internal/router"
+	"github.com/WildEgor/gChecker/internal/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/wire"
 )
@@ -25,8 +25,12 @@ func NewServer() (*fiber.App, error) {
 	routerRouter := router.NewRouter(healthCheckHandler)
 	telegramConfig := config.NewTelegramConfig()
 	telegramAdapter := adapters.NewTelegramAdapter(telegramConfig)
+	healthCheckAdapter, err := adapters.NewHealthCheckAdapter()
+	if err != nil {
+		return nil, err
+	}
 	servicesConfig := config.NewServicesConfig()
-	checkerService := services.NewCheckerService(telegramAdapter, servicesConfig)
+	checkerService := services.NewCheckerService(telegramAdapter, healthCheckAdapter, servicesConfig)
 	app := NewApp(appConfig, routerRouter, checkerService)
 	return app, nil
 }

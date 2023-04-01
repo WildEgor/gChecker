@@ -6,7 +6,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// HINT: holds on general app settings
 type AppConfig struct {
 	Port    string `env:"APP_PORT"`
 	Mode    string `env:"APP_MODE"`
@@ -19,7 +18,7 @@ func NewAppConfig() *AppConfig {
 
 	if err := godotenv.Load(".env"); err == nil {
 		if err := env.Parse(&cfg); err != nil {
-			log.Printf("%+v\n", err)
+			log.Printf("[AppConfig] %+v\n", err)
 		}
 
 		if cfg.GoEnv == "" {

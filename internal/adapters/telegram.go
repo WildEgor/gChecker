@@ -1,24 +1,24 @@
 package adapters
 
 import (
-	"github.com/WildEgor/checker/pkg/config"
+	"github.com/WildEgor/gChecker/internal/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
 )
+
+type ITelegramAdapter interface {
+	Send(text string) error
+}
 
 type TelegramAdapter struct {
 	tc  *config.TelegramConfig
 	bot *tgbotapi.BotAPI
 }
 
-type ITelegramAdapter interface {
-	SendAlert(resource string, status string) error
-}
-
 func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 	botTg, err := tgbotapi.NewBotAPI(tc.Token)
 	if err != nil {
-		log.Fatal("Token not provided", err)
+		log.Fatal("[TelegramAdapter] Token not provided", err)
 	}
 
 	return &TelegramAdapter{
@@ -27,9 +27,9 @@ func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 	}
 }
 
-func (t *TelegramAdapter) SendAlert(r string, s string) error {
-	log.Info("Send alert!")
-	msg := tgbotapi.NewMessage(t.tc.ChatId, "Service <code>"+r+"</code> is down\n"+"Status: <b>"+s+"</b>")
+func (t *TelegramAdapter) Send(text string) error {
+	log.Debug("[TelegramAdapter] Send message: ", text)
+	msg := tgbotapi.NewMessage(t.tc.ChatId, text)
 	msg.ParseMode = tgbotapi.ModeHTML
 	_, err := t.bot.Send(msg)
 	return err
