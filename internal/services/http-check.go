@@ -48,7 +48,10 @@ func NewHttpCheck(cfg *HttpCheckConfig) func(ctx context.Context) error {
 
 		if resp.StatusCode >= http.StatusBadRequest {
 			if cfg.Sender != nil {
-				cfg.Sender.Send("Service <code>" + resp.Status + "</code> is down\n" + "Status: <b>" + cfg.URL + "</b>")
+				cfg.Sender.Send(SenderData{
+					to:   "",
+					text: "Service <code>" + resp.Status + "</code> is down\n" + "Status: <b>" + cfg.URL + "</b>",
+				})
 			}
 			log.Errorf("[HttpCheck] %v service is not available at the moment", cfg.URL)
 		}

@@ -1,13 +1,14 @@
 package adapters
 
 import (
+	"strconv"
 	"github.com/WildEgor/gChecker/internal/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
 )
 
 type ITelegramAdapter interface {
-	Send(text string) error
+	Send(to string, text string) error
 }
 
 type TelegramAdapter struct {
@@ -27,9 +28,20 @@ func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 	}
 }
 
-func (t *TelegramAdapter) Send(text string) error {
+func (t *TelegramAdapter) Send(to string, text string) error {
 	log.Debug("[TelegramAdapter] Send message: ", text)
-	msg := tgbotapi.NewMessage(t.tc.ChatId, text)
+	var msg tgbotapi.MessageConfig
+
+	if to == "" {
+		msg = tgbotapi.NewMessage(t.tc.ChatId, text)
+	} else {
+		value, err := strconv.ParseInt(to, 64, 2)
+		if err != nil {
+			return err
+		}
+		msg = tgbotapi.NewMessage(value, text)
+	}
+
 	msg.ParseMode = tgbotapi.ModeHTML
 	_, err := t.bot.Send(msg)
 	return err
