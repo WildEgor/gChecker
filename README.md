@@ -1,4 +1,5 @@
 Service check all url from service.json (also expose self health-check) and send alert notification to telegram chat if down
+Using Wire DI with Fiber. Also apply some patterns (Adapter, Strategy)
 
 ## Usage
 
