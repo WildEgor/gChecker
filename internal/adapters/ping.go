@@ -1,8 +1,8 @@
 package adapters
 
 import (
-	"github.com/WildEgor/checker/pkg/config"
-	domains "github.com/WildEgor/checker/pkg/domain"
+	"github.com/WildEgor/gChecker/internal/config"
+	domains "github.com/WildEgor/gChecker/internal/domain"
 )
 
 type PingAdapter struct {

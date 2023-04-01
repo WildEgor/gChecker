@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	adapters "github.com/WildEgor/checker/pkg/adapters"
+	adapters "github.com/WildEgor/gChecker/internal/adapters"
 	"github.com/gofiber/fiber/v2"
 )
 
