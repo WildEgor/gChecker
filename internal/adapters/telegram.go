@@ -2,7 +2,6 @@ package adapters
 
 import (
 	"strconv"
-
 	"github.com/WildEgor/gChecker/internal/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"

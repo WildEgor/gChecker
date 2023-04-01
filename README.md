@@ -1,13 +1,13 @@
-# Go-Sample-Project
-
-Try Go with Fiber and Wire DI.
+Service check all url from service.json (also expose self health-check) and send alert notification to telegram chat if down. Using Wire DI with Fiber. Also apply some patterns (Adapter, Strategy)
 
 Service check all url from service.json and expose self health-check
 
 ## Usage
 
 ```bash
-   docker-compose up --build checker-dev
+   docker-compose up --build checker-dev // for develop
+   
+   docker-compose up --build checker // for prod
 ```
 
 ## Docs:
