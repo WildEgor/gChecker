@@ -1,7 +1,12 @@
 package services
 
 type ISender interface {
-	Send(text string) error
+	Send(to string, text string) error
+}
+
+type SenderData struct {
+	to   string
+	text string
 }
 
 type Sender struct {
@@ -19,7 +24,7 @@ func (s *Sender) SetTransport(t ISender) *Sender {
 	return s
 }
 
-func (s *Sender) Send(text string) error {
-	err := s.sender.Send(text)
+func (s *Sender) Send(data SenderData) error {
+	err := s.sender.Send(data.to, data.text)
 	return err
 }

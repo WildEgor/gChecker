@@ -46,7 +46,7 @@ func (s *CheckerService) Check() {
 				}
 				defer resp.Body.Close()
 				if resp.StatusCode != 200 {
-					if err := s.telegramAdapter.Send("Service <code>" + resp.Status + "</code> is down\n" + "Status: <b>" + service.URL + "</b>"); err != nil {
+					if err := s.telegramAdapter.Send("", "Service <code>"+resp.Status+"</code> is down\n"+"Status: <b>"+service.URL+"</b>"); err != nil {
 						log.Warn("Cannot send telegram alert. Reason: ", err)
 					}
 					sleep = time.Duration(s.servicesConfig.Timeout)
