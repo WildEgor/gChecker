@@ -2,7 +2,7 @@
 
 Try Go with Fiber and Wire DI.
 
-Service check all url from service.json and expose self health-check
+Service check all url from service.json (also expose self health-check) and send alert notification to telegram chat if down
 
 ## Usage
 
