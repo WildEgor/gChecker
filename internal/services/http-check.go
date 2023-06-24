@@ -54,6 +54,8 @@ func NewHttpCheck(cfg *HttpCheckConfig) func(ctx context.Context) error {
 				})
 			}
 			log.Errorf("[HttpCheck] %v service is not available at the moment", cfg.URL)
+		} else {
+			log.Infof("[HttpCheck] %v service is available at the moment", cfg.URL)
 		}
 
 		return nil

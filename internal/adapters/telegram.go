@@ -2,6 +2,7 @@ package adapters
 
 import (
 	"strconv"
+
 	"github.com/WildEgor/gChecker/internal/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
@@ -19,7 +20,7 @@ type TelegramAdapter struct {
 func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 	botTg, err := tgbotapi.NewBotAPI(tc.Token)
 	if err != nil {
-		log.Fatal("[TelegramAdapter] Token not provided", err)
+		log.Fatal("[TelegramAdapter] Init tgbotapi failed: ", err)
 	}
 
 	return &TelegramAdapter{
@@ -29,7 +30,7 @@ func NewTelegramAdapter(tc *config.TelegramConfig) *TelegramAdapter {
 }
 
 func (t *TelegramAdapter) Send(to string, text string) error {
-	log.Debug("[TelegramAdapter] Send message: ", text)
+	log.Debug("[TelegramAdapter] Send message: ", to, text)
 	var msg tgbotapi.MessageConfig
 
 	if to == "" {

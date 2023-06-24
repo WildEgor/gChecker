@@ -10,8 +10,9 @@ import (
 const ConfigName = "services.json"
 
 type ServiceUrl struct {
-	ID  string `json:"id"`
-	URL string `json:"url"`
+	ID      string `json:"id"`
+	URL     string `json:"url"`
+	Enabled bool   `json:"enabled"`
 }
 
 type ServicesConfig struct {

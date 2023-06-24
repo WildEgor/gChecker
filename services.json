@@ -3,11 +3,13 @@
     "urls": [
         {
             "id": "Google 404",
-            "url": "https://google.com/test"
+            "url": "https://google.com/test",
+            "enabled": false
         },
         {
             "id": "Google OK",
-            "url": "https://google.com"
+            "url": "https://google.com",
+            "enabled": true
         }
     ]
 }
